@@ -1,0 +1,51 @@
+header:
+  version: 21
+
+machine: raspberrypi5
+distro: iotdemo
+target: iotdemo-image
+
+repos:
+  poky:
+    url: https://git.yoctoproject.org/poky
+    branch: scarthgap
+    layers:
+      meta:
+      meta-poky:
+
+  meta-raspberrypi:
+    url: https://github.com/agherzan/meta-raspberrypi
+    branch: scarthgap
+    layers:
+      .:
+
+  meta-openembedded:
+    url: https://github.com/openembedded/meta-openembedded
+    branch: scarthgap
+    layers:
+      meta-oe:
+      meta-python:
+      meta-networking:
+
+  meta-rauc:
+    url: https://github.com/rauc/meta-rauc
+    branch: scarthgap
+    layers:
+      .:
+
+  meta-iotdemo:
+    path: meta-iotdemo
+    layers:
+      .:
+
+      
+local_conf_header:
+  meta-iotdemo: |
+    BB_NUMBER_THREADS ?= "${@oe.utils.cpu_count()}"
+    PARALLEL_MAKE ?= "-j ${@oe.utils.cpu_count()}"
+    DL_DIR ?= "${TOPDIR}/../downloads"
+    SSTATE_DIR ?= "${TOPDIR}/../sstate-cache"
+    ENABLE_UART = "1"
+    RPI_EXTRA_CONFIG = "dtoverlay=uart0\n"
+    INHERIT:append = " rm_work"
+    RPI_USE_U_BOOT = "1"

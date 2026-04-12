@@ -1,0 +1,17 @@
+build/
+
+poky/
+meta-raspberrypi/
+meta-openembedded/
+meta-rauc/
+
+*.pyc
+__pycache__/
+
+oe-init-build-env
+sstate-cache/
+downloads/
+
+.vscode/
+*.swp
+*~
