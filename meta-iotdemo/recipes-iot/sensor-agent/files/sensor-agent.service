@@ -1,0 +1,17 @@
+[Unit]
+Description=MQTT Sensor Agent
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+ExecStart=/usr/bin/python3 /usr/bin/sensor-agent.py
+Restart=on-failure
+RestartSec=5
+User=root
+Environment="MQTT_BROKER=localhost"
+Environment="MQTT_PORT=1883"
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

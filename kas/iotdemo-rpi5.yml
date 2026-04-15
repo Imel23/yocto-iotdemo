@@ -48,4 +48,3 @@ local_conf_header:
     ENABLE_UART = "1"
     RPI_EXTRA_CONFIG = "dtoverlay=uart0\n"
     INHERIT:append = " rm_work"
-    RPI_USE_U_BOOT = "1"
